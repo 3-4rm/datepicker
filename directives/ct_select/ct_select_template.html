@@ -1,0 +1,6 @@
+<button ng-click="toggleOptionsContainerState()">{{selected}}</button>
+<div class= "optionsContainer" ng-hide="isOptionsContainerHidden">
+	<ul>
+		<li ng-repeat="option in options" ng-click="selectOption(option)">{{option}}</li>
+	</ul>
+</div>

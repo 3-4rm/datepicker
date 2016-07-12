@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<html>
+<head>
+	<title>Custom datepicker with Angular.js code sample</title>
+	<style>
+		.ng-cloak{
+			
+		}
+		.ng-cloak:after{
+			content: "date picker should be here";
+
+		}
+		.ng-cloak *{
+			display: none;
+		}
+
+		#ctDatePickerDemo{
+		    width: 400px;
+		    margin-left: auto;
+		    margin-right: auto;
+		    border: 2px solid black;
+		    height: 270px;
+		    margin-top: 50px;
+		}
+
+		#redLabel{
+		    color: red;
+		    font-size: 20px;
+		    margin-top: 10px;
+		    margin-bottom: 20px;
+    		text-align: center;			
+		}
+
+		#foreword{
+			width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: justify;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="directives/ct_date_picker/ct_date_picker.css"/>
+</head>
+<body>
+	<div id="foreword">
+		<h1 style="text-align: center">Custom Date Picker Powered with Angular.js</h1>
+		<div style="font-weight: bold; font-style: italic">
+			To see web-page in action serve all it resources from any local server as regular html page (it will not work if just open it as file in browser.)
+			Angular.js library reference is to Google's CDN.<br/><br/>
+		</div>
+
+		<div>
+
+			Just a sample to show that I know something about Angular.js.<br/>
+			The benefit over using 3-rd party date pickers - it was "made to order" so we have better flexibility and control on details on implementation ruther than on configuration, plus it is more compact and extensible for very custom features.<br/>
+		</div>
+	</div>
+
+	<div id="ctDatePickerDemo" class="ng-cloak" ng-app="ctDatePickerDemo" ng-cloak ng-controller="ctDatePickerDemoCtrl">
+		
+		<div id="redLabel">The Date is: {{dates.theDate}}</div>
+		
+		<div 	ct-date-picker watchdate="dates.theDate"
+				startrange="dates.selectableDateRangeFrom"
+				endrange="dates.selectableDateRangeTo"
+				class="ctDatePicker1 unselectable">
+					CT DATE PICKER WILL BE HERE
+		</div>	
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+	<script type="text/javascript">
+		angular.module("ctDatePickerDemo", [])
+			.controller("ctDatePickerDemoCtrl", function($scope){
+
+			    function addDays(date, days) {
+			      var result = new Date(date);
+			      result.setDate(date.getDate() + days);
+			      return result;
+			    };
+
+			    var today = (function(){var result = new Date();
+	                    result.setHours(0);
+	                    result.setMinutes(0);
+	                    result.setSeconds(0);
+	                    result.setMilliseconds(0);
+	                    return result;
+	                  })(); 
+
+			    $scope.dates = {};
+			    $scope.dates.theDate = today; //addDays(today, -7);
+			    $scope.dates.selectableDateRangeFrom = (function(){
+				    var year = today.getFullYear() - 3;
+				    var month = today.getMonth();
+				    var day = today.getDay() - 7;
+				    return new Date(year, month, day);
+    			})();
+    			$scope.dates.selectableDateRangeTo = today;
+
+			});
+	</script>
+
+	<script src="filters/range_filter.js"></script>
+	<script src="directives/ct_select/ct_select.js"></script>
+	<script src="directives/ct_date_picker/ct_date_picker.js"></script>
+</body>
+</html>
